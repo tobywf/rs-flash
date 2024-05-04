@@ -1,0 +1,39 @@
+[package]
+name = "rs-flash-cli"
+version = "0.1.0"
+edition = "2021"
+
+authors = ["Toby Fleming <tobywf@users.noreply.github.com>"]
+license = "MIT or Apache-2.0"
+publish = false
+rust-version = "1.77.1"
+
+autoexamples = false
+autobenches = false
+
+include = ["/src", "/LICENSE-APACHE", "/LICENSE-MIT"]
+
+[[bin]]
+name = "rs-flash"
+path = "src/main.rs"
+test = false
+bench = false
+
+[dependencies]
+# error handling
+color-eyre = "0.6"
+# logging
+log = "0.4"
+pretty_env_logger = "0.5"
+# CLI
+clap = { version = "4.5", default-features = false, features = [
+    "std",
+    "color",
+    "help",
+    "usage",
+    "derive",
+    "env",
+] }
+
+ram-probe-rs = { version = "0.2.0", git = "https://github.com/tobywf/ram-probe-rs.git", rev = "2386c9b" }
+rs-flash = { path = "../rs-flash" }

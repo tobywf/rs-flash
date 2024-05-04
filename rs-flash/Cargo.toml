@@ -1,0 +1,16 @@
+[package]
+name = "rs-flash"
+version = "0.1.0"
+edition = "2021"
+
+authors = ["Toby Fleming <tobywf@users.noreply.github.com>"]
+license = "MIT or Apache-2.0"
+publish = false
+rust-version = "1.77.1"
+
+autoexamples = false
+autobenches = false
+
+include = ["/src", "build.rs", "/rs_flash.x", "/LICENSE-APACHE", "/LICENSE-MIT"]
+
+[dependencies]

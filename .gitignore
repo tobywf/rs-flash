@@ -1,0 +1,4 @@
+target/
+/firmware
+.DS_Store
+*.bin

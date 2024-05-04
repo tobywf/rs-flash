@@ -1,0 +1,53 @@
+[package]
+name = "dump-spi-flash"
+version = "0.1.0"
+edition = "2021"
+
+authors = ["Toby Fleming <tobywf@users.noreply.github.com>"]
+license = "GPL-3.0-or-later"
+publish = false
+rust-version = "1.77.1"
+
+autoexamples = false
+autobenches = false
+
+include = ["/src", "build.rs", "/LICENSE", "/link_ram.x", "/memory.x"]
+
+[[bin]]
+name = "dump"
+path = "src/main.rs"
+test = false
+bench = false
+
+[dependencies]
+cortex-m = { version = "0.7", features = ["critical-section-single-core"] }
+cortex-m-rt = "0.7"
+
+defmt = "0.3"
+defmt-rtt = "0.4"
+panic-probe = { version = "0.3", features = ["print-defmt"] }
+
+stm32f1xx-hal = { version = "0.10.0", features = ["rt", "stm32f107", "medium"] }
+spi-memory = "0.2.0"
+
+rs-flash = { path = "../rs-flash" }
+
+[profile.dev]
+opt-level = 1
+# opt-level = "z"  # optimize for binary size, but also turn off loop vectorization.
+debug = "full"  # aka. 2 or true
+debug-assertions = true
+overflow-checks = true
+lto = "thin"  # does nothing with `codegen-units = 1`?
+incremental = false
+codegen-units = 1
+
+[profile.release]
+opt-level = 3
+# opt-level = "z"  # optimize for binary size, but also turn off loop vectorization.
+debug = "full"  # aka. 2 or true
+debug-assertions = false
+overflow-checks = false
+lto = "fat"  # does nothing with `codegen-units = 1`?
+incremental = false
+codegen-units = 1
